@@ -1,0 +1,17 @@
+<%= form_for(@blower) do |f| %>
+  <% if @blower.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@blower.errors.count, "error") %> prohibited this blower from being saved:</h2>
+
+      <ul>
+      <% @blower.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

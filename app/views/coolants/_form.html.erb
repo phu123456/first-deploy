@@ -1,0 +1,17 @@
+<%= form_for(@coolant) do |f| %>
+  <% if @coolant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coolant.errors.count, "error") %> prohibited this coolant from being saved:</h2>
+
+      <ul>
+      <% @coolant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

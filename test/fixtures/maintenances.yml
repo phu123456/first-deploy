@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  engine_oil: 9.99
+  transmission_oil: 9.99
+  gear_oil: 9.99
+  air_filter: 9.99
+  water_coolant: 9.99
+  cement_blower: 9.99
+
+two:
+  engine_oil: 9.99
+  transmission_oil: 9.99
+  gear_oil: 9.99
+  air_filter: 9.99
+  water_coolant: 9.99
+  cement_blower: 9.99

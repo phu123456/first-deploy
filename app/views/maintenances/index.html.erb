@@ -1,0 +1,53 @@
+<br>
+<div class="panel panel-default test" style="width: 75%;">
+  <div align="center" class="panel-heading">ค่าเตือน</div>
+  <div class="jumbotron">
+    <div class="panel-body">
+      <div align="center">
+        <table class="table" >
+          <thead>
+            <tr>
+              <td></td>
+              <td align="center">น้ำมันเครื่อง</td>
+              <td align="center">น้ำมันเกียร์</td>
+              <td align="center">น้ำมันเฟืองท้าย</td>
+              <td align="center">กรองอากาศ</td>
+              <td align="center">น้ำยาหม้อน้ำ</td>
+              <td align="center">น้ำยาปั้มลม</td>
+
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @maintenances.each do |maintenance| %>
+              <tr>
+                <% if maintenance.id == 1 %>
+                  <td align="center"><svg height="23" width="23">
+                        <circle cx="11.5" cy="11.5" r="11.5" fill="red"/>
+                      </svg>
+                  </td align="center">
+                <% else %>
+                  <td align="center"><svg height="23" width="23">
+                        <circle cx="11.5" cy="11.5" r="11.5" fill="orange"/>
+                      </svg>
+                  </td align="center">
+                <% end %>
+
+
+                <td align="center"><%= number_with_delimiter(maintenance.engine_oil.to_i, :delimiter => ',') %></td>
+                <td align="center"><%= number_with_delimiter(maintenance.transmission_oil.to_i , :delimiter => ',') %></td>
+                <td align="center"><%= number_with_delimiter(maintenance.gear_oil.to_i, :delimiter => ',') %></td>
+                <td align="center"><%= number_with_delimiter(maintenance.air_filter.to_i, :delimiter => ',') %></td>
+                <td align="center"><%= number_with_delimiter(maintenance.water_coolant.to_i, :delimiter => ',') %></td>
+                <td align="center"><%= number_with_delimiter(maintenance.cement_blower.to_i, :delimiter => ',') %></td>
+                <% if current_user.role?('admin') %>
+                  <td align="center"><%= link_to 'เปลี่ยน', edit_maintenance_path(maintenance) %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

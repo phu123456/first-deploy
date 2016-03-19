@@ -1,0 +1,32 @@
+<p>
+  <strong>Engine oil:</strong>
+  <%= @maintenance.engine_oil %>
+</p>
+
+<p>
+  <strong>Transmission oil:</strong>
+  <%= @maintenance.transmission_oil %>
+</p>
+
+<p>
+  <strong>Gear oil:</strong>
+  <%= @maintenance.gear_oil %>
+</p>
+
+<p>
+  <strong>Air filter:</strong>
+  <%= @maintenance.air_filter %>
+</p>
+
+<p>
+  <strong>Water coolant:</strong>
+  <%= @maintenance.water_coolant %>
+</p>
+
+<p>
+  <strong>Cement blower:</strong>
+  <%= @maintenance.cement_blower %>
+</p>
+
+<%= link_to 'Edit', edit_maintenance_path(@maintenance) %> |
+<%= link_to 'Back', maintenances_path %>

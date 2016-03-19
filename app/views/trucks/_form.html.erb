@@ -1,0 +1,32 @@
+<%= form_for(@truck) do |f| %>
+  <% if @truck.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@truck.errors.count, "error") %> prohibited this truck from being saved:</h2>
+
+      <ul>
+      <% @truck.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<br>
+<div class="panel panel-default test" style="width: 30%;">
+  <div class="jumbotron" >
+    <div class="field">
+      <label>ทะเบียรถ</label>
+      <%= f.text_field :plate, :class => "form-control" %>
+    </div>
+    <div class="field">
+      <br>
+      <label>ปูนเต้า</label> &nbsp;
+      <%= f.check_box :bulker %>
+    </div>
+    <div align="center" class="actions">
+      <br>
+      <input type="submit" name="commit" value="เพิ่มทะเบียนรถ">
+    </div>
+  <% end %>
+  </div>
+</div>

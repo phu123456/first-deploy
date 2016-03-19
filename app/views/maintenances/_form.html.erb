@@ -1,0 +1,54 @@
+<%= form_for(@maintenance) do |f| %>
+  <% if @maintenance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@maintenance.errors.count, "error") %> prohibited this maintenance from being saved:</h2>
+
+      <ul>
+      <% @maintenance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<br>
+<div class="panel panel-default test" style="width: 30%;">
+  <div class="jumbotron" >
+      <div class="field">
+
+        <label>น้ำมันเครื่อง</label>
+        <%= f.text_field :engine_oil, :class => "form-control" %>
+      </div>
+
+      <div class="field">
+        <br>
+        <label>น้ำมันเกียร์</label>
+        <%= f.text_field :transmission_oil, :class => "form-control" %>
+      </div>
+      <div class="field">
+        <br>
+        <label>น้ำมันเฟืองท้าย</label>
+        <%= f.text_field :gear_oil, :class => "form-control" %>
+      </div>
+      <div class="field">
+        <br>
+        <label>กรองอากาศ</label>
+        <%= f.text_field :air_filter, :class => "form-control" %>
+      </div>
+      <div class="field">
+        <br>
+        <label>น้ำยาหม้อน้ำ</label>
+        <%= f.text_field :water_coolant, :class => "form-control" %>
+      </div>
+      <div class="field">
+        <br>
+        <label>น้ำยาปั้มลม</label>
+        <%= f.text_field :cement_blower, :class => "form-control" %>
+      </div>
+      <br><br>
+      <div align="center" class="actions">
+        <input type="submit" name="commit" value="อัพเดท">
+      </div>
+    <% end %>
+  </div>
+</div>

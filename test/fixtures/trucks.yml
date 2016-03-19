@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: trucks
+#
+#  id         :integer          not null, primary key
+#  plate      :text
+#  bulker     :boolean
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plate: MyText
+  bulker: false
+
+two:
+  plate: MyText
+  bulker: false

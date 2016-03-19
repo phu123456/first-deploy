@@ -1,0 +1,163 @@
+<%= form_for([@truck, @trip]) do |f| %>
+  <% if @trip.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
+
+      <ul>
+      <% @trip.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<br>
+<div class="panel panel-default test" style="width: 53%;">
+  <div align="center" class="panel-heading"> ทะเบียน: <%=@truck.plate %></div>
+  <div class="jumbotron">
+    <div class="panel-body">
+      <div align="center">
+        <span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span>
+        &nbsp;&nbsp;<%= f.date_select :trip_date , {:use_month_names => ['มกราคา', 'กุมพาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน','ธันวาคม']} %>
+      </div>
+      <br>
+
+      <!-- <div class="col-xs-2">
+          <label>สองขา</label>
+          <input type="checkbox" value="1" name="trip[trip_type]" id="trip_trip_type">
+      </div> -->
+
+        <div class="col-xs-5">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> พนักงานขับรถ
+            <%= f.text_field :driver, :class => "form-control", :id => "trip_driver" %>
+
+            <br>
+            <span class="glyphicon glyphicon-scale" aria-hidden="true"></span> น้ำหนัก(ตัน)
+            <%= f.text_field :weight, :class => "form-control", :id => "trip_weight" %>
+
+
+            <br>
+            <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> &nbsp;ชนิดปูน
+            <%= f.text_field :cement, :class => "form-control", :id => "trip_cement" %>
+
+            <br>
+            <span class="glyphicon glyphicon-oil" aria-hidden="true"></span> น้ำมัน(ลิตร)
+            <%= f.text_field :liter, :class => "form-control", :id => "trip_liter" %>
+
+            <br>
+            <label>หนักไปหนักกลับ</label>
+            &nbsp;<%= f.check_box :trip_type %>
+
+        </div>
+
+        <div class="col-xs-12">
+            <br>
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> ค้นหาสถานที่
+            <input type="text" id="start" class="form-control" value='ปูนซีเมนต์นครหลวง ตำบล ทับกวาง สระบุรี ประเทศไทย'>
+            <br>
+            <input type="text" id="cal-destination" class="form-control" size='50' placeholder="สถานที่ส่งของ...">
+            <br>
+            <button type="button" class="calulate-distance"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> คำนวน</button>
+
+        </div>
+
+        <div class="col-xs-4">
+            <br>
+            <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> ระยะทาง
+            <%= f.text_field :distance, :class => "form-control", :id => "distance" %>
+
+            <br>
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> กิโลเมตร/ลิตร
+            <%= f.text_field :average, :class => "form-control", :id => "trip_average" %>
+
+        </div>
+
+
+        <div class="col-xs-12">
+            <br>
+            <span class="glyphicon glyphicon-road" aria-hidden="true"></span> สถานที่ส่งของ
+            <%= f.text_field :destination, :class => "form-control", :id => "input-destination" %>
+        </div>
+
+      </div>
+        <br>
+        <div class= "actions" align="center">
+          <a href="/trucks" class="btn btn-danger">ยกเลิก</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="submit" name="commit" class="btn btn-success">
+            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> บันทึก
+          </button>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb6K8MpdBsL6fZBT71sFsWlbxqcJohuHY&libraries=places" type="text/javascript"></script>
+<!-- calculate distance -->
+<script>
+  var new_distance;
+  var searchBox = new google.maps.places.SearchBox(document.getElementById('cal-destination'));
+  var searchOrigin = new google.maps.places.SearchBox(document.getElementById('start'));
+  $('.calulate-distance').click(function() {
+  //find distance in km
+    var start = document.getElementById("start").value;
+    var destination = document.getElementById("cal-destination").value;
+
+    var service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix(
+      {
+        origins: [start],
+        destinations: [destination],
+        travelMode: google.maps.TravelMode.DRIVING,
+
+      }, callback);
+
+      function callback(response, status) {
+        if (status == google.maps.DistanceMatrixStatus.OK) {
+          var origins = response.originAddresses;
+          var destinations = response.destinationAddresses;
+
+          for (var i = 0; i < origins.length; i++) {
+            var results = response.rows[i].elements;
+            for (var j = 0; j < results.length; j++) {
+              var element = results[j];
+              var distance = element.distance.text;
+              var duration = element.duration.text;
+              var from = origins[i];
+              var to = destinations[j];
+              console.log(distance);
+      for (var i = 0; i < distance.length; i++) {
+        if (distance[i] == " ") {
+          new_distance = distance.substring(0, i)
+        }
+      }
+
+
+      document.getElementById("distance").value = (new_distance.replace(",", ""))*2;
+      document.getElementById("input-destination").value = destination.replace("ประเทศไทย", "")
+
+
+
+      average =  (document.getElementById("distance").value) / (document.getElementById("trip_liter").value)
+      document.getElementById("trip_average").value = average.toPrecision(3);
+      console.log(destination)
+
+            }
+          }
+        }
+      }
+
+
+    });
+
+    $(document).ready(function() {
+        $("form").bind("keypress", function(e) {
+            if (e.keyCode == 13) {
+                return false;
+            }
+        });
+    });
+
+  </script>
