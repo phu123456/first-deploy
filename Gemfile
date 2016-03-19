@@ -29,6 +29,7 @@ gem 'autoprefixer-rails'
 
 gem 'cancancan', '~> 1.10'
 
+gem 'foreman'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -40,6 +41,7 @@ gem 'cancancan', '~> 1.10'
 gem 'capistrano', '~> 3.4.0'
 gem 'capistrano-rails'
 gem 'capistrano-rvm'
+gem 'pg'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,8 +56,4 @@ end
 
 group :development do
   gem 'sqlite3'
-end
-
-group :production do
-  gem 'pg'
 end
