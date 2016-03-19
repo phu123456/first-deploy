@@ -4,7 +4,7 @@ lock '3.4.0'
 set :application, 'maintenance-truck-deploy'
 set :repo_url, 'git@github.com:phu123456/first-deploy.git'
 set :rvm_ruby_version, '2.2.1@maintenance-truck-deploy'
-set :deploy_to, 'home/Desktop/maintenance-truck-deploy'
+set :deploy_to, 'home/slurpe3/maintenance-truck-deploy'
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 set :keep_releases, 3
